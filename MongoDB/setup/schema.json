@@ -1,0 +1,23 @@
+{
+    "validator": {
+      "$jsonSchema": {
+        "bsonType": "object",
+        "required": ["username", "message", "timestamp"],
+        "properties": {
+          "username": {
+            "bsonType": "string",
+            "description": "Username must be a string"
+          },
+          "message": {
+            "bsonType": "string",
+            "maxLength": 280,
+            "description": "Message must be a string and no more than 280 characters"
+          },
+          "timestamp": {
+            "bsonType": "date",
+            "description": "Timestamp must be a valid date"
+          }
+        }
+      }
+    }
+  }
