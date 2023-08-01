@@ -18,7 +18,10 @@ deno task start
 
 This will watch the project directory and restart as necessary.
 
-
+## Usage MINE
+```
+deno run --allow-net --allow-read --allow-env --allow-run --watch=static/,routes/ main.ts
+```
 ## docker
 
 ```
