@@ -10,7 +10,18 @@ if (!MONGODB_URI) {
   Deno.exit(1);
 }
 
-await client.connect(MONGODB_URI);
-const database = client.database("TODO_APP");
+try {
+  await client.connect(MONGODB_URI);
+} catch (error) {
+  console.error(`Failed to connect to MongoDB at ${MONGODB_URI}:`, error);
+}
+
+let database;
+
+try {
+  database = client.database("TODO_APP");
+} catch (error) {
+  console.error(`Failed to connect to MongoDB at ${MONGODB_URI}:`, error);
+}
 
 export default database;
