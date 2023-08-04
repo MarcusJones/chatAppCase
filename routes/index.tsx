@@ -1,14 +1,13 @@
-/** @jsx h */
+// /** @jsx h */
 import { h } from "preact";
-import { tw } from "@twind";
 import { PageProps } from "$fresh/server.ts";
 // import * as log from "https://deno.land/std/log/mod.ts";
 import { useState, useEffect } from "preact/hooks";
 
-import { Message } from "../core/data/models/message.js";
-import { messageHandler } from "../handlers/messageHandler.js"; // Import the handler from the new file
-import MessageList from "../components/MessageList.js";
-import MessageInput from "../components/MessageInput.js";
+import { Message } from "../core/data/models/message.ts";
+import { messageHandler } from "../handlers/messageHandler.ts"; // Import the handler from the new file
+import MessageList from "../components/MessageList.tsx";
+import MessageInput from "../components/MessageInput.tsx";
 
 export const handler = messageHandler;
 
@@ -40,7 +39,7 @@ export default function Messages(props: PageProps<MessagesProps>) {
 
   return (
     <div
-      className={tw`h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-teal-400 via-teal-200 to-teal-100 font-sans`}
+      className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-teal-400 via-teal-200 to-teal-100 font-sans"
     >
       <MessageInput
         username={username}

@@ -1,7 +1,7 @@
-import { Collections } from "../collections.js";
+import { Collections } from "../collections.ts";
 
-import { Message, NewMessage } from "../models/message.js";
-import client from "../mongo-client.js";
+import { Message, NewMessage } from "../models/message.ts";
+import client from "../mongo-client.ts";
 
 export default function createMessage(message: NewMessage) {
   console.log(message)

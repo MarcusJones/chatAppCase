@@ -1,7 +1,7 @@
 import { Handlers } from "$fresh/server.ts";
-import createMessage from "../core/data/message/create-message.js";
-import listAllMessages from "../core/data/message/list-message.js";
-import { Message } from "../core/data/models/message.js";
+import createMessage from "../core/data/message/create-message.ts";
+import listAllMessages from "../core/data/message/list-message.ts";
+import { Message } from "../core/data/models/message.ts";
 
 export const messageHandler: Handlers<{
   allMessages: Message[];

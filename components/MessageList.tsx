@@ -1,8 +1,8 @@
 import { h } from "preact";
 import { useRef, useEffect } from "preact/hooks";
 import { tw } from "twind";
-import { colors } from "../styles.js";
-import MessageItem from "./MessageItem.js";
+import { colors } from "../styles.ts";
+import MessageItem from "./MessageItem.tsx";
 
 const React = { createElement: h };
 export interface Message {
@@ -37,7 +37,7 @@ const MessageList: h.FunctionComponent<MessageListProps> = ({ messages }) => {
   return (
     <div
       ref={scrollContainerRef}
-      className={tw`bg-white rounded-lg shadow-lg p-6 m-8 lg:w-2/4 overflow-y-auto`}
+      className="bg-white rounded-lg shadow-lg p-6 m-8 lg:w-2/4 overflow-y-auto"
       // style={{ maxHeight: "calc(20 * 1.5em)" }}
       style={{ maxHeight: "calc(20 * 1.5em)" }}
     >
