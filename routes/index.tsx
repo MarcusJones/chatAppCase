@@ -10,20 +10,16 @@ import MessageInput from "../components/MessageInput.tsx";
 
 export const handler = messageHandler;
 
-type MessagesProps = {
+type MainPageProps = {
   allMessages: Message[];
 };
 
-export default function Messages(props: PageProps<MessagesProps>) {
+export default function MainPage(props: PageProps<MainPageProps>) {
+  console.log("Rendering MainPage")
   const { data } = props;
   const { allMessages } = data;
 
-  // State for the username, so that it stays after sending the message
-  // const [username, setUsername] = useState("");
-  // const [username, setUsername] = useState(
-  //   localStorage.getItem("username") || ""
-  // );
-  const [username, setUsername] = useState(localStorage.getItem("username"));
+  const [username, setUsername] = useState(localStorage.getItem("username") || "");
   const [message, setMessage] = useState("");
   // Whenever username changes, update local storage
 
@@ -33,10 +29,11 @@ export default function Messages(props: PageProps<MessagesProps>) {
   }, [username]);
 
   const handleFormSubmit = (e: React.FormEvent) => {
+    console.log("Form submitted!")
     e.preventDefault();
-    if (username.trim() === "" || message.trim() === "") {
-      return;
-    }
+    // if (username.trim() === "" || message.trim() === "") {
+    //   return;
+    // }
     setMessage("");
   };
 

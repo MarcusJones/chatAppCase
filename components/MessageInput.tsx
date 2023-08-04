@@ -1,7 +1,7 @@
 import { h } from "preact";
-import { tw } from "twind";
-import { useRef, useEffect } from "preact/hooks";
-const React = { createElement: h };
+// import { tw } from "twind";
+// import { useRef, useEffect } from "preact/hooks";
+// const React = { createElement: h };
 // import { colors } from "../styles.ts";
 
 interface MessageInputProps {
@@ -19,15 +19,23 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
   setMessage,
   onSubmit,
 }) => {
-  const messageInputRef = useRef(null);
+  // const messageInputRef = useRef(null);
 
-  const handleUsernameChange = (e: any) => {
-    setUsername(e.target.value);
+  const internalHandleFormSubmit = (e: Event) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+    console.log('Internal form submission'); // Log for debugging
+    if (onSubmit) {
+      onSubmit(e); // Call the passed-in onSubmit function
+    }
   };
 
-  useEffect(() => {
-    messageInputRef.current.focus();
-  }, []);
+  // const handleUsernameChange = (e: any) => {
+  //   setUsername(e.target.value);
+  // };
+
+  // useEffect(() => {
+  //   messageInputRef.current.focus();
+  // }, []);
   // const isFormValid = username.trim() !== "" && message.trim() !== "";
 
   return (
@@ -36,7 +44,7 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
 
       <form
         method="POST"
-        onSubmit={onSubmit}
+        onSubmit={internalHandleFormSubmit}
         className="flex flex-wrap items-center space-x-4"
       >
         <div className="w-1/4 flex flex-col">
@@ -53,7 +61,7 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
             name="user"
             value={username}
             // onChange={(e) => setUsername(e.target.value)}
-            onChange={handleUsernameChange}
+            // onChange={handleUsernameChange}
           />
         </div>
         <div className="w-1/2 flex flex-col">
@@ -64,7 +72,7 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
             Message
           </label>
           <input
-            ref={messageInputRef}
+            // ref={messageInputRef}
             className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
             id="message"
             type="text"

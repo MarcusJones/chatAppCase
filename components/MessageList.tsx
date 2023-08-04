@@ -1,7 +1,7 @@
 import { h } from "preact";
 import { useRef, useEffect } from "preact/hooks";
-import { tw } from "twind";
-import { colors } from "../styles.ts";
+// import { tw } from "twind";
+// import { colors } from "../styles.ts";
 import MessageItem from "./MessageItem.tsx";
 
 const React = { createElement: h };
