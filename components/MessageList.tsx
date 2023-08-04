@@ -1,8 +1,8 @@
 import { h } from "preact";
 import { useRef, useEffect } from "preact/hooks";
 import { tw } from "twind";
-import { colors } from "../styles.ts";
-import MessageItem from "./MessageItem.tsx";
+import { colors } from "../styles.js";
+import MessageItem from "./MessageItem.js";
 
 const React = { createElement: h };
 export interface Message {

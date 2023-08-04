@@ -1,7 +1,7 @@
-import { Collections } from "../collections.ts";
+import { Collections } from "../collections.js";
 
-import { Message } from "../models/message.ts";
-import client from "../mongo-client.ts";
+import { Message } from "../models/message.js";
+import client from "../mongo-client.js";
 
 export default async function listAllMessages() {
   const messages = await client
