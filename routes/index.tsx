@@ -1,4 +1,3 @@
-// /** @jsx h */
 import { h } from "preact";
 import { PageProps } from "$fresh/server.ts";
 // import * as log from "https://deno.land/std/log/mod.ts";
@@ -21,32 +20,36 @@ export default function Messages(props: PageProps<MessagesProps>) {
 
   // State for the username, so that it stays after sending the message
   // const [username, setUsername] = useState("");
-  const [username, setUsername] = useState(
-    localStorage.getItem("username") || ""
-  );
+  // const [username, setUsername] = useState(
+  //   localStorage.getItem("username") || ""
+  // );
+  const [username, setUsername] = useState(localStorage.getItem("username"));
   const [message, setMessage] = useState("");
   // Whenever username changes, update local storage
 
   useEffect(() => {
+    console.log("Setting username in localStorage:", username);
     localStorage.setItem("username", username);
   }, [username]);
 
-  // Handle form submission
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (username.trim() === "" || message.trim() === "") {
+      return;
+    }
     setMessage("");
   };
 
   return (
-    <div
-      className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-teal-400 via-teal-200 to-teal-100 font-sans"
-    >
+    <div className="h-full w-full flex flex-col items-center justify-center bg-gradient-to-r from-teal-400 via-teal-200 to-teal-100 font-sans">
       <MessageInput
         username={username}
         setUsername={setUsername}
         message={message}
         setMessage={setMessage}
-      />{" "}
+        onSubmit={handleFormSubmit}
+      />
+      {/* {" "} */}
       <MessageList messages={allMessages} />
     </div>
   );

@@ -19,20 +19,16 @@ export const messageHandler: Handlers<{
   async POST(req, ctx) {
     // console.log("POST, req", req, "ctx", ctx)
     const formData = await req.formData();
-    console.log(formData);
+    // console.log(formData);
     const jsonData = Object.fromEntries(formData);
 
-    console.log("jsonData", jsonData);
+    // console.log("jsonData", jsonData);
 
     if (jsonData.user && jsonData.message) {
-      // Handle Message type
-      // Example: { user: "Bne", message: "asdf HI " }
-      console.log("Processing Message");
       await createMessage({
         ...jsonData,
         read: false,
       });
-      // Your code to handle Message goes here
     } else {
       // throw new Error("Unsupported data type");
     }

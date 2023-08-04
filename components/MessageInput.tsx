@@ -9,6 +9,7 @@ interface MessageInputProps {
   setUsername: (value: string) => void;
   message: string;
   setMessage: (value: string) => void;
+  onSubmit: (e: React.FormEvent) => void;
 }
 
 const MessageInput: h.FunctionComponent<MessageInputProps> = ({
@@ -16,26 +17,14 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
   setUsername,
   message,
   setMessage,
+  onSubmit,
 }) => {
-  const messageInputRef = useRef(null); // Reference to the message input field
+  const messageInputRef = useRef(null);
 
   const handleUsernameChange = (e: any) => {
-    // Update the username in the component's state
     setUsername(e.target.value);
   };
-  const handleFormSubmit = (e: Event) => {
-    e.preventDefault();
-    // Check if either the username or message field is empty before submitting
-    if (username.trim() === "" || message.trim() === "") {
-      return;
-    }
 
-    // Clear the message field and set focus on it
-    setMessage("");
-    messageInputRef.current.focus();
-  };
-
-  // Optionally, to set the initial focus on the message input field
   useEffect(() => {
     messageInputRef.current.focus();
   }, []);
@@ -47,7 +36,7 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
 
       <form
         method="POST"
-        onSubmit={handleFormSubmit}
+        onSubmit={onSubmit}
         className="flex flex-wrap items-center space-x-4"
       >
         <div className="w-1/4 flex flex-col">
@@ -85,12 +74,7 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
           />
         </div>
         <button
-          className="
-                                          bg-[#007BFF]
-                                          hover:bg-[#5A98D2]
-                                          text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline text-sm align-middle"
-          // className={tw`bg-${colors.primaryBlue} hover:bg-${colors.secondaryBlue} text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline text-sm align-middle`}
-          // disabled={!isFormValid} // Disable the button if the form is not valid
+          className="bg-[#007BFF] hover:bg-[#5A98D2] text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline text-sm align-middle"
           type="submit"
         >
           Post
