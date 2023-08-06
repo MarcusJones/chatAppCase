@@ -5,7 +5,7 @@ import * as log from "https://deno.land/std/log/mod.ts";
 import { Message } from "../core/data/models/message.ts";
 import { messageHandler } from "../handlers/messageHandler.ts";
 import MessageList from "../components/MessageList.tsx";
-import MessageInput from "../islands/MessageInput.tsx";  // importing the island component
+import MessageInput from "../islands/MessageInput.tsx";
 
 log.info("Rendering MainPage");
 

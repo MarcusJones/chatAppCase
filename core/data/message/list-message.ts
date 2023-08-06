@@ -16,6 +16,6 @@ export default async function listAllMessages() {
     .toArray(); // Convert to an array if necessary
 
   // return messages.reverse(); // Reverse the array to sort the messages in ascending order by timestamp
-  console.log(`Listing ${messages.length} messages`);
+  console.log(`Returning ${messages.length} messages from database`);
   return messages;
 }

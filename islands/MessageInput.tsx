@@ -1,17 +1,32 @@
 import { h } from "preact";
-import { useEffect, useState, useRef } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 interface MessageInputProps {
   username: string;
   onSubmit: (e: React.FormEvent) => void;
 }
 
+const generateRandomUsername = (): string => {
+  const randomID = Math.floor(Math.random() * 10000);
+  return `User_${randomID}`;
+};
+
 const MessageInput: h.FunctionComponent<MessageInputProps> = ({
   username: initialUsername,
   onSubmit,
 }) => {
+  const messageInputRef = useRef<HTMLInputElement>(null); // 1. Create a ref for the input field
 
-  const [localUsername, setLocalUsername] = useState<string>(initialUsername);
+  useEffect(() => {
+    // 2. Set the focus on the input field once the component mounts
+    if (messageInputRef.current) {
+      messageInputRef.current.focus();
+    }
+  }, []);
+
+  const [localUsername, setLocalUsername] = useState<string>(
+    localStorage.getItem("username") || generateRandomUsername(),
+  );
   const [message, setMessage] = useState<string>("");
 
   const firstRender = useRef(true);
