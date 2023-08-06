@@ -21,3 +21,8 @@ tear-down:
 	docker stop chat-app
 	docker container rm chat-app
 	docker network rm chat-network
+
+save-images:
+	mkdir -p .images
+	docker save -o ./.images/chat-app.tar chat-app
+	docker save -o ./.images/chat-mongodb.tar chat-mongodb
