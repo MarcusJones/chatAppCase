@@ -3,25 +3,34 @@ name: Build and Push Docker Images
 on:
   push:
     branches:
-      - main  # or your default branch name
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout Code
       uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Convert repo name to lowercase
+      run: echo "REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
     - name: Login to GitHub Docker Registry
       run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
     - name: Build and Push App Docker Image
       run: |
-        docker build -t docker.pkg.github.com/${{ github.repository | toLower }}/chat-app:latest .
-        docker push docker.pkg.github.com/${{ github.repository | toLower }}/chat-app:latest
+        docker build -t docker.pkg.github.com/${REPO_NAME}/chat-app:latest .
+        docker push docker.pkg.github.com/${REPO_NAME}/chat-app:latest
 
     - name: Build and Push MongoDB Docker Image
       run: |
-        docker build -t docker.pkg.github.com/${{ github.repository | toLower }}/chat-mongodb:latest ./MongoDB/
-        docker push docker.pkg.github.com/${{ github.repository | toLower }}/chat-mongodb:latest
+        docker build -t docker.pkg.github.com/${REPO_NAME}/chat-mongodb:latest ./MongoDB/
+        docker push docker.pkg.github.com/${REPO_NAME}/chat-mongodb:latest
+
+    - name: Logout from Docker
+      run: docker logout docker.pkg.github.com
