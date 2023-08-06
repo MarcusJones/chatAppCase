@@ -5,7 +5,19 @@ build-mongo:
 	docker build -t chat-mongodb ./MongoDB/
 
 run-app-stack:
-	docker run --rm --name chat-mongodb -d -p 27017:27017 chat-mongodb
+	docker network create chat-network || true
+	docker run --rm --name chat-mongodb -d --network chat-network chat-mongodb
+	sleep 5
+	docker run \
+		--rm  \
+		--name chat-app \
+		--network chat-network \
+		-e MONGODB_URI='mongodb://chat-mongodb:27017' \
+		-p 8000:8000 \
+		chat-app
 
 tear-down:
 	docker stop chat-mongodb
+	docker stop chat-app
+	docker container rm chat-app
+	docker network rm chat-network
