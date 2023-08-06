@@ -17,7 +17,7 @@ export const messageHandler: Handlers<{
   },
 
   async POST(req, ctx) {
-    // console.log("POST, req", req, "ctx", ctx)
+    console.log("POST, req", req, "ctx", ctx)
     const formData = await req.formData();
     // console.log(formData);
     const jsonData = Object.fromEntries(formData);

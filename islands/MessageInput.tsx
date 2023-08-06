@@ -1,4 +1,5 @@
 import { h } from "preact";
+import { useEffect, useState, useRef } from "preact/hooks";
 // import { tw } from "twind";
 // import { useRef, useEffect } from "preact/hooks";
 // const React = { createElement: h };
@@ -13,30 +14,36 @@ interface MessageInputProps {
 }
 
 const MessageInput: h.FunctionComponent<MessageInputProps> = ({
-  username,
+  // username,
   setUsername,
-  message,
-  setMessage,
   onSubmit,
 }) => {
   // const messageInputRef = useRef(null);
-
   const internalHandleFormSubmit = (e: Event) => {
     e.preventDefault(); // Prevent the default form submission behavior
-    console.log('Internal form submission'); // Log for debugging
+    console.log("Internal form submission");
     if (onSubmit) {
-      onSubmit(e); // Call the passed-in onSubmit function
+      onSubmit(e);
     }
   };
 
-  // const handleUsernameChange = (e: any) => {
-  //   setUsername(e.target.value);
-  // };
+  const firstRender = useRef(true);
 
-  // useEffect(() => {
-  //   messageInputRef.current.focus();
-  // }, []);
-  // const isFormValid = username.trim() !== "" && message.trim() !== "";
+  let initialUsername = localStorage.getItem("username") || "";
+
+  useEffect(() => {
+    // On first client-side render, update the state with the localStorage value
+    if (firstRender.current) {
+      const storedUsername = localStorage.getItem("username");
+      if (storedUsername) {
+        setUsername(storedUsername);
+      }
+      firstRender.current = false;
+    } else {
+      console.log("Setting username in localStorage:", initialUsername);
+      localStorage.setItem("username", initialUsername);
+    }
+  }, [initialUsername, setUsername]);
 
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 m-8 lg:w-2/4">
@@ -59,8 +66,8 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
             id="user"
             type="text"
             name="user"
-            value={username}
-            // onChange={(e) => setUsername(e.target.value)}
+            // value={username}
+            onChange={(e) => setUsername(e.target.value)}
             // onChange={handleUsernameChange}
           />
         </div>
@@ -77,7 +84,7 @@ const MessageInput: h.FunctionComponent<MessageInputProps> = ({
             id="message"
             type="text"
             name="message"
-            value={message}
+            // value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
         </div>

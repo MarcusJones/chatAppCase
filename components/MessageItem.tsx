@@ -1,7 +1,5 @@
 import { h } from "preact";
-// import { tw } from "twind";
 import { colors } from "../styles.ts";
-// const React = { createElement: h };
 
 const MessageItem: h.FunctionComponent<{ value: Message }> = ({ value }) => (
   <div className="mb-4">
