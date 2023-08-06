@@ -26,3 +26,12 @@ save-images:
 	mkdir -p .images
 	docker save -o ./.images/chat-app.tar chat-app
 	docker save -o ./.images/chat-mongodb.tar chat-mongodb
+
+upload-images:
+	scp -i $(KEY_PATH) ./.images/chat-app.tar ubuntu@$(REMOTE_IP):/home/ubuntu/chat-app.tar
+	scp -i $(KEY_PATH) ./.images/chat-mongodb.tar ubuntu@$(REMOTE_IP):/home/ubuntu/chat-mongodb.tar
+	scp -i #$(KEY_PATH) ./Makefile ubuntu@$(REMOTE_IP):/home/ubuntu/Makefile
+
+unpack-images:
+	docker load -i chat-mongodb.tar
+	docker load -i chat-app.tar
