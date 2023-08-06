@@ -1,5 +1,5 @@
 # chatAppCase
-Salesy case study
+Salesy case study.
 
 ## Application
 
