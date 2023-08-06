@@ -18,10 +18,10 @@ jobs:
 
     - name: Build and Push App Docker Image
       run: |
-        docker build -t docker.pkg.github.com/${{ github.repository }}/chat-app:latest .
-        docker push docker.pkg.github.com/${{ github.repository }}/chat-app:latest
+        docker build -t docker.pkg.github.com/${{ github.repository | toLower }}/chat-app:latest .
+        docker push docker.pkg.github.com/${{ github.repository | toLower }}/chat-app:latest
 
     - name: Build and Push MongoDB Docker Image
       run: |
-        docker build -t docker.pkg.github.com/${{ github.repository }}/chat-mongodb:latest ./MongoDB/
-        docker push docker.pkg.github.com/${{ github.repository }}/chat-mongodb:latest
+        docker build -t docker.pkg.github.com/${{ github.repository | toLower }}/chat-mongodb:latest ./MongoDB/
+        docker push docker.pkg.github.com/${{ github.repository | toLower }}/chat-mongodb:latest
