@@ -10,48 +10,44 @@ Real time updates or polling
 Extra support for simultaneous messages
 
 ## Requirements
-Task: Create a small single-page Real-time Chat Application where anonymous
-users can send messages to a shared text board without prior registration.
+Task: Create a small single-page Real-time Chat Application where anonymous users can send messages to a shared text board without prior registration.
+
 Requirements:
-● The application should be containerized using Docker.
-● Use a NoSQL database to store the sent messages.
-● Use Denoland’s Fresh framework and any other libraries of your choice.
-● The application should be able to handle multiple users sending messagessimultaneously.
-● Use GitHub for development, with regular commits to show progress.
-● Use GitHub Actions to automatically lint the code on push.
+  - The application should be containerized using Docker.
+  - Use a NoSQL database to store the sent messages.
+  - Use Denoland’s Fresh framework and any other libraries of your choice.
+  - The application should be able to handle multiple users sending messagessimultaneously.
+  - Use GitHub for development, with regular commits to show progress.
+  - Use GitHub Actions to automatically lint the code on push.
 
 Deliverables:
-● A working Docker container with the application.
-● Source code for the application, hosted on a public GitHub repository with a commit history showing progress.
-● A brief documentation on how to run the application and any design decisions made.
+  - A working Docker container with the application.
+  - Source code for the application, hosted on a public GitHub repository with a commit history showing progress.
+  - A brief documentation on how to run the application and any design decisions made.
 
-# Dev
-See Makefile!
-
-### Usage
+# Developer quickstart
+See Makefile, or following commands to get started;
 
 Make sure to install Deno: https://deno.land/manual/getting_started/installation
 
-Then start the project:
-
-```
-deno task start
-```
-
-This will watch the project directory and restart as necessary.
-
-
-### Docker
-
+Run the MongoDB container, map to host. Set this into the `.env` file.
 ```
 docker build -t chat-mongodb .
 docker run --rm --name mongodb -d -p 27017:27017 chat-mongodb
+cp .env.example .env
 ```
 
+Run the dev server.
+```
+deno run -A --watch=static/,routes/ dev.ts
+```
+
+Browse to `http://localhost:8000/`.
+
+Troubleshoot mongo with;
 ```
 mongosh --host localhost --port 27017
 ```
 
 # Prod
-
-
+See Makefile for commands to build containers and run the stack.

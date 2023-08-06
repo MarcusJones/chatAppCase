@@ -1,3 +1,6 @@
+run-dev:
+	deno run -A --watch=static/,routes/ dev.ts
+
 build-app:
 	docker build -t chat-app .
 
