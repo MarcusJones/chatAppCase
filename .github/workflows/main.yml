@@ -1,0 +1,27 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main  # or your default branch name
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to GitHub Docker Registry
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+    - name: Build and Push App Docker Image
+      run: |
+        docker build -t docker.pkg.github.com/${{ github.repository }}/chat-app:latest .
+        docker push docker.pkg.github.com/${{ github.repository }}/chat-app:latest
+
+    - name: Build and Push MongoDB Docker Image
+      run: |
+        docker build -t docker.pkg.github.com/${{ github.repository }}/chat-mongodb:latest ./MongoDB/
+        docker push docker.pkg.github.com/${{ github.repository }}/chat-mongodb:latest
